@@ -1,4 +1,4 @@
-// const mongoose = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const meetSchema = new Schema({
     first_name : { type: String },
@@ -11,6 +11,6 @@ const meetSchema = new Schema({
     managerDaily : { type: String }
   });
 
-// const Meet = mongoose.model('Meet', meetSchema);
+const Meet = model('Meet', meetSchema);
 
-module.exports = meetSchema;
+module.exports = Meet;
