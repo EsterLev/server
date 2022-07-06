@@ -1,26 +1,16 @@
-// const mongoose = require('mongoose');
-
 const { Schema, model } = require('mongoose');
 
-const userSchema = new Schema({
-    name: String,
-});
+const meetSchema = new Schema({
+    firstName : { type: String },
+    lastName : { type: String },
+    address : { type: String },
+    phone : { type: String },
+    email  : { type: String },
+    height : { type: Number },
+    weight : { type: String },
+    managerDaily : { type: Array() }
+  });
 
-const User = model('User', userSchema);
+const Meet = model('Meet', meetSchema);
 
-module.exports = User;
-
-// const meetSchema = new Schema({
-//     first_name : { type: String },
-//     last_name : { type: String },
-//     address : { type: String },
-//     phone : { type: String },
-//     email  : { type: String },
-//     height : { type: Number },
-//     weight : { type: String },
-//     managerDaily : { type: String }
-//   });
-
-// // const Meet = mongoose.model('Meet', meetSchema);
-
-// module.exports = meetSchema;
+module.exports = Meet;

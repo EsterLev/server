@@ -82,36 +82,34 @@ const fs = require('fs/promises');
 // const fsPromises = require('fs').promises;
 const router = express.Router();
 //fsPromises.readFile('../users.json', 'utf8');
-const { getUserById, getUsers, addUser, findByIdAndDelete } = require('../services/users.service');
+const { getUserById, getUsers, addUser, findByIdAndDelete, updateUser } = require('../services/users.service');
 
 
 router.post('/', async (req, res) => {
-    const newUser = req.body;
+    const { firstName, lastName, address, phone, email, height, weight, managerDaily } = req.body;
+    let user;
     try {
-        await addUser(newUser.firstName, newUser.lastName, newUser.city, newUser.street, newUser.number, newUser.phone, newUser.email, newUser.height, newUser.weight);
-        message: { 'success create newUser' }
+        user =  await addUser(
+            firstName,
+            lastName,
+            address,
+            phone,
+            email,
+            height,
+            weight,
+            managerDaily
+        );
+    } catch (err) {
+        console.error(err)
     }
-    catch (err) {
-        console.error(err);
+    res.send(user);
+    try {
+        const user = req.body.user;
+        const newUser = await addUser(user);
+        res.send(newUser);
+    } catch (error) {
+        res.status(500).send(error.message);
     }
-    res.send();
-
-    // const newUser = req.body; 
-    // try {
-    //     await Users.addUser(
-    //         first_name = newUser.first_name,
-    //         last_name = newUser.last_name,
-    //         address = newUser.address,
-    //         phone = newUser.phone,
-    //         email  = newUser.email, 
-    //         height = newUser.height,
-    //         weight = newUser.weight,
-    //         managerDaily = newUser.managerDaily
-    //     );
-    // } catch (err) {
-    //     console.error(err)
-    // }
-    // res.send();
 });
 
 
@@ -119,6 +117,23 @@ router.post('/', async (req, res) => {
 // GET /users/:id
 router.get('/:id', async (req, res, next) => {
     const id = req.params.id;
+    let user;
+    try {
+        user = await getUserById(id);
+        if (user === undefined)
+            res.send('not found user with id ' + id);
+    }
+    catch (error) {
+        next(error);
+    }
+    res.send(user);
+});
+
+
+//by filter
+//????
+router.get('/:search', async (req, res, next) => {
+    const search = req.params.id;
     let user;
     try {
         user = await getUserById(id);
@@ -160,5 +175,11 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    const { user } = req.body;
+    const updatedUser = await updateUser(id, user);
+    res.send(updatedUser);
+})
 module.exports = router;
 
