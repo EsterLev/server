@@ -69,6 +69,8 @@ async function getUserById(id) {
     console.log(user);
     return user;
 }
+let baseId =[...getTasks()].pop()?.id || 1;
+const getId = () => ++baseId;
 
 async function addUser(firstName, lastName, city, street, number, phone, email, height, weight) {
     let obj = {
@@ -76,7 +78,7 @@ async function addUser(firstName, lastName, city, street, number, phone, email, 
             city: city, street: street,
             number: number
         }, phone: phone, email: email, height: height,
-        weight: { start: weight, meetings: [] }, diary: []
+        weight: { start: weight, meetings: [] }, diary: [], id:getId()
     };
     let user = JSON.stringify(obj, null, 2);
     await fs.writeFile('../users.json', user, err => { console.log(err) });
@@ -84,11 +86,18 @@ async function addUser(firstName, lastName, city, street, number, phone, email, 
 }
 
 async function findByIdAndDelete(id){
-    const user = data.find(user => user.id === id);
+    const users = getUsers();
+    const index = users.findIndex(t => t.id === id);
+    tasks.splice(index, 1);
+    try {
+        await fs.writeJson(__dirname + '/users.json', users);
+        console.log('success!')
+    } catch (err) {
+        console.error(err)
+    }
+    res.send('success');
     
 }
-
-
 
 module.exports = {
     getUsers,
