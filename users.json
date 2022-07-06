@@ -19,10 +19,16 @@
       "phone": "0556796376",
       "email": "shirasharabani@gmail.com",
       "height": "1.70",
-      "weight": [
-        60,
-        58,
-        56
+      "meeting": [
+        {"date":"28-06-2022",
+          "wheight":"58"
+        },
+        {"date":"03-07-2022",
+          "wheight":"56"
+        },
+        {"date":"10-07-2022",
+          "wheight":"54"
+        }
       ],
       "managerDaily": [
         {
@@ -50,10 +56,16 @@
       "phone": "0583281357",
       "email": "st3281357@gmail.com",
       "height": "1.62",
-      "weight": [
-        60,
-        58,
-        56
+      "meeting": [
+        {"date":"28-06-2022",
+          "wheight":"58"
+        },
+        {"date":"03-07-2022",
+          "wheight":"56"
+        },
+        {"date":"10-07-2022",
+          "wheight":"54"
+        }
       ],
       "managerDaily": [
         {
@@ -79,7 +91,17 @@
       "phone": "0589742357",
       "email": "enter mail address",
       "height": "1.55",
-      "weight": "38",
+      "meeting": [
+        {"date":"28-06-2022",
+          "wheight":"58"
+        },
+        {"date":"03-07-2022",
+          "wheight":"56"
+        },
+        {"date":"10-07-2022",
+          "wheight":"54"
+        }
+      ],
       "id": 3
     },
     {
@@ -92,7 +114,17 @@
         "phone": "enter phone number",
         "mail": "enter mail address",
         "height": 1.75,
-        "weight": [70],
+        "meeting": [
+          {"date":"28-06-2022",
+            "wheight":"58"
+          },
+          {"date":"03-07-2022",
+            "wheight":"56"
+          },
+          {"date":"10-07-2022",
+            "wheight":"54"
+          }
+        ],
         "id": 4
     }
   ]
