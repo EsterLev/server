@@ -7,13 +7,12 @@ const UserController = require('./controllers/user.controller');
 
 const PORT = process.env.PORT || 5000;
 
-app.get('/api/users', (req, res)=>{
-    res.send(users);
-})
+// app.get('/users', (req, res)=>{
+//     res.send(users);
+// })
 
 
-app.use('controllers/user', UserController);
-
+app.use('/users', UserController);
 
 // app.get('/', (req, res)=>{})
 
