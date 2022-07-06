@@ -7,29 +7,24 @@ const { getUserById, getUsers, addUser, findByIdAndDelete, updateUser } = requir
 
 
 router.post('/', async (req, res) => {
-    const { firstName, lastName, address, phone, email, height, weight, managerDaily } = req.body;
-    let user;
     try {
-        user =  await addUser(
-            firstName,
-            lastName,
-            address,
-            phone,
-            email,
-            height,
-            weight,
-            managerDaily
-        );
+        if (req.body) {
+            const { firstName, lastName, address, phone, email, height, weight, managerDaily } = req.body;
+            const data = {
+                firstName,
+                lastName,
+                address,
+                phone,
+                email,
+                height,
+                weight,
+                managerDaily
+            }
+            const created = await addUser(data);
+            res.send(created);
+        }
     } catch (err) {
         console.error(err)
-    }
-    res.send(user);
-    try {
-        const user = req.body.user;
-        const newUser = await addUser(user);
-        res.send(newUser);
-    } catch (error) {
-        res.status(500).send(error.message);
     }
 });
 
@@ -77,7 +72,6 @@ router.get('/', async (req, res, next) => {
     let users;
     try {
         users = await getUsers();
-        console.log(users);
     }
     catch (error) {
         next(error);
@@ -97,10 +91,22 @@ router.delete('/:id', async (req, res) => {
 })
 
 router.put('/:id', async (req, res) => {
-    const { id } = req.params;
-    const { user } = req.body;
-    const updatedUser = await updateUser(id, user);
-    res.send(updatedUser);
+    if (req.body) {
+        const { id } = req.params;
+        const { firstName, lastName, address, phone, email, height, weight, managerDaily } = req.body;
+        const data = {
+            firstName,
+            lastName,
+            address,
+            phone,
+            email,
+            height,
+            weight,
+            managerDaily
+        }
+        const created = await updateUser(id, data);
+        res.send(created);
+    }
 })
 module.exports = router;
 
