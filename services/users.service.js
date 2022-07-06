@@ -5,8 +5,7 @@ const uuidv4 = uuid.v4;
 
 //get all users
 async function getUsers() {
-    const dataFile = await fs.readFile('./users.json');
-    let data = JSON.parse(dataFile);
+    const data = await getAllJson();
     return data.users;
 }
 

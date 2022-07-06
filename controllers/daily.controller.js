@@ -3,34 +3,29 @@ const fs = require('fs/promises');
 // const fsPromises = require('fs').promises;
 const router = express.Router();
 //fsPromises.readFile('../users.json', 'utf8');
-const { getUserById, getUsers, addUser, findByIdAndDelete, updateUser } = require('../services/users.service');
+const { getDaily, addDaily, findByIdAndDelete, updateDaily} = require('../services/daily.service');
 
 
-router.post('/', async (req, res) => {
-    const { firstName, lastName, address, phone, email, height, weight, managerDaily } = req.body;
-    let user;
+router.post('/:id', async (req, res) => {
+    // const { managerDaily } = req.body;
+    const id = req.params.id;
+    let Daily;
     try {
-        user =  await addUser(
-            firstName,
-            lastName,
-            address,
-            phone,
-            email,
-            height,
-            weight,
-            managerDaily
+        Daily =  await addDaily(
+            id,
+            req.body
         );
     } catch (err) {
         console.error(err)
     }
-    res.send(user);
-    try {
-        const user = req.body.user;
-        const newUser = await addUser(user);
-        res.send(newUser);
-    } catch (error) {
-        res.status(500).send(error.message);
-    }
+    res.send(Daily);
+    // try {
+    //     const user = req.body.user;
+    //     const newUser = await addUser(user);
+    //     res.send(newUser);
+    // } catch (error) {
+    //     res.status(500).send(error.message);
+    // }
 });
 
 
@@ -40,7 +35,7 @@ router.get('/:id', async (req, res, next) => {
     const id = req.params.id;
     let user;
     try {
-        user = await getUserById(id);
+        user = await getDaily(id);
         if (user === undefined)
             res.send('not found user with id ' + id);
     }
@@ -73,22 +68,25 @@ router.get('/:search', async (req, res, next) => {
 //     res.send(user);
 // })
 
-router.get('/', async (req, res, next) => {
-    let users;
+router.get('/:id', async (req, res, next) => {
+    let diary;
+    const id = req.params.id;
     try {
-        users = await getUsers();
-        console.log(users);
+        dairy = await getDaily(id);
+        console.log(dairy);
     }
     catch (error) {
         next(error);
     }
-    res.send(users);
+    res.send(dairy);
 });
 
-router.delete('/:id', async (req, res) => {
-    const id = req.params.id;
+router.delete('/:idU/:idD', async (req, res) => {
+    const userId= req.params.idU;
+    const dairyId= req.params.idD;
     try {
-        const ans = await findByIdAndDelete(id);
+        console.log(userId, dairyId);
+        const ans = await findByIdAndDelete(userId, dairyId);
         res.send(ans);
     } catch (err) {
         console.error(err);
@@ -96,10 +94,10 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-router.put('/:id', async (req, res) => {
-    const { id } = req.params;
-    const { user } = req.body;
-    const updatedUser = await updateUser(id, user);
+router.post('/:idU/:idD', async (req, res) => {
+    const idu = req.params.idU;
+    const idd = req.params.idD;
+    const updatedUser = await updateDaily(idu, idd, req.body);
     res.send(updatedUser);
 })
 module.exports = router;
