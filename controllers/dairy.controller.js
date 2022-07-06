@@ -103,4 +103,3 @@ router.put('/:id', async (req, res) => {
     res.send(updatedUser);
 })
 module.exports = router;
-
