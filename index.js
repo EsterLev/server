@@ -4,7 +4,7 @@ const cors = require('cors');
 const userController = require('./controllers/user.controller');
 const dailyController = require('./controllers/daily.controller');
 const loginController = require('./controllers/login.controller');
-// const authMiddleware = require('./middleware/middleware');
+const authMiddleware = require('./middleware/middleware');
 const port = 3000
 
 app.use(cors());
