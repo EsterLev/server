@@ -9,8 +9,8 @@ const { login } = require('../services/login.service');
 router.post('/', async (req, res) => {
     try {
         if (req.body) {
-            const { id } = req.body;
-            const succsess = await login(id);
+            const { email, phone } = req.body;
+            const succsess = await login(email, phone);
             res.send(succsess);
         }
     } catch (err) {

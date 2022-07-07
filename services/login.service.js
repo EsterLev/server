@@ -7,13 +7,14 @@ async function getAllJson() {
     return data;
 }
 
-async function login(id) {
+async function login(email, phone) {
     const data = await getAllJson();
-    if (data.manger.id === parseInt(id))
-        return data.manger;
-    else {
-        const user = data.users.find(u =>u.id === parseInt(id));
+    const user = await data.users.find(u => u.email === email && u.phone === phone);
+    if (user)
         return user;
+    else {
+        if (data.manager.email === email && data.manager.phone === phone)
+            return data.manager;
     }
 }
 
