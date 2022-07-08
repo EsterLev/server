@@ -1,4 +1,5 @@
 const fs = require('fs/promises');
+const { get } = require('http');
 const uuid = require('uuid');
 const uuidv4 = uuid.v4;
 // const fsPromises = require('fs').promises;
@@ -9,17 +10,12 @@ async function getUsers() {
     return data.users;
 }
 
-// const getUsers = async () => fs.readFile('./users.json').then(data => JSON.parse(data)).users;
-
-
 //get all the json
 async function getAllJson() {
     const dataFile = await fs.readFile('./users.json');
     let data = JSON.parse(dataFile);
     return data;
 }
-// const getAllJson = async () => fs.readFile('./users.json').then(data => JSON.parse(data));
-
 
 //update json
 const updateJson = async (user) => fs.writeFile('./users.json', JSON.stringify(user));
