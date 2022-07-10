@@ -26,23 +26,192 @@
     "produces": [
         "application/json"
     ],
-    "paths" : {
-        "/user" : {
-            "get" : {
-                "summary" : "Get all the users",
+    "paths": {
+        "/users": {
+            "get": {
+                "summary": "Get all the users",
                 "description": "Get all the tasks",
-                "produces": ["application/json"],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [],
                 "responses": {
                     "200": {
                         "description": "successful operation",
                         "schema": {
-                            "type": "array"
+                            "$ref": "#/definitions/Users"
                         }
                     }
-
+                }
+            }
+        },
+        "definitions": {
+            "User": {
+                "required": [
+                    "name",
+                    "_id",
+                    "companies"
+                ],
+                "properties": {
+                    "_id": {
+                        "type": "integer",
+                        "uniqueItems": true
+                    },
+                    "isPublic": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "books": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "companies": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "Users": {
+                "type": "array",
+                "$ref": "#/definitions/User"
+            }
+        },
+        "definitions": {
+            "User": {
+                "required": [
+                    "name",
+                    "_id",
+                    "companies"
+                ],
+                "properties": {
+                    "_id": {
+                        "type": "integer",
+                        "uniqueItems": true
+                    },
+                    "isPublic": {
+                        "type": "boolean"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "books": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string"
+                                },
+                                "amount": {
+                                    "type": "number"
+                                }
+                            }
+                        }
+                    },
+                    "companies": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "Users": {
+                "type": "array",
+                "$ref": "#/definitions/Users"
+            }
+        },
+        "/addUser": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "description": "Create new user in system",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "User that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "New user is created",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of user that we want to find",
+                    "type": "integer"
+                }
+            ],
+            "put": {
+                "summary": "Update user with give ID",
+                "tags": [
+                    "Users"
+                ],
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "User with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/updateUser"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User is updated",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                }
+            }
+        },
+        "delete": {
+            "summary": "Delete user with given ID",
+            "tags": [
+                "Users"
+            ],
+            "responses": {
+                "200": {
+                    "description": "User is deleted",
+                    "schema": {
+                        "$ref": "#/definitions/User"
+                    }
                 }
             }
         }
-   }
+    }
 }
