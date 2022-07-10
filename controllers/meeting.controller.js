@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const id = req.params.id;
     try {
-        Users.findByIdAndDelete(id);
+        user.meetings.findByIdAndDelete(id);
         console.log('success!')
     } catch (err) {
         console.error(err)
