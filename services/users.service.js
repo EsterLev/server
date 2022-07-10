@@ -22,8 +22,8 @@ const updateJson = async (user) => fs.writeFile('./users.json', JSON.stringify(u
 
 
 async function getUserById(id) {
-    const users =await getUsers();
-    const user =await users.find(u => u.id === parseInt(id));
+    const users = await getUsers();
+    const user = await users.find(u => u.id === parseInt(id));
     return user;
 }
 
@@ -48,24 +48,24 @@ async function getUserById(id) {
 // }
 
 async function addUser(user) {
-        if (!user.firstName || !user.lastName ) {
-            throw new Error('user must include your full name');
-        }
-        const users = await getUsers();
-        user.id = users[users.length-1].id+1;
-        const data = await getAllJson() || [];
-        const exists = data.users.find(u => u.phone === user.phone && u.email === user.email);
-        if (exists) {
-            throw new Error('user with email and phone already exists');
-        }
-        data.users.push(user);
-        await updateJson(data);
-        return user;
+    if (!user.firstName || !user.lastName) {
+        throw new Error('user must include your full name');
     }
+    const users = await getUsers();
+    user.id = users[users.length - 1].id + 1;
+    const data = await getAllJson() || [];
+    const exists = data.users.find(u => u.phone === user.phone && u.email === user.email);
+    if (exists) {
+        throw new Error('user with email and phone already exists');
+    }
+    data.users.push(user);
+    await updateJson(data);
+    return user;
+}
 
-async function findByIdAndDelete(id){
+async function findByIdAndDelete(id) {
     const data = await getAllJson();
-    const index =await data.users.findIndex(u => u.id === parseInt(id));
+    const index = await data.users.findIndex(u => u.id === parseInt(id));
     data.users.splice(index, 1);
     try {
         await updateJson(data);
@@ -83,11 +83,20 @@ const updateUser = async (id, user) => {
     await updateJson(data);
     return _user;
 }
+let userslist;
+const getUserBySearch = async (search) => {
+    if (userslist === undefined)
+        userslist = await getUsers();
+    userslist = userslist.filter(u => u.id === parseInt(search) || u.firstName === search || u.lastName === search || u.email === search || u.address === search || u.phone === search || u.height === search || u.weight === search || u.managerDaily === search);
+    if (userslist === undefined) return null;
+    return userslist;
+}
 
 module.exports = {
     getUsers,
     getUserById,
     addUser,
-    findByIdAndDelete, 
-    updateUser
+    findByIdAndDelete,
+    updateUser,
+    getUserBySearch
 }

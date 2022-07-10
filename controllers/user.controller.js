@@ -3,7 +3,7 @@ const fs = require('fs/promises');
 // const fsPromises = require('fs').promises;
 const router = express.Router();
 //fsPromises.readFile('../users.json', 'utf8');
-const { getUserById, getUsers, addUser, findByIdAndDelete, updateUser } = require('../services/users.service');
+const { getUserById, getUsers, addUser, findByIdAndDelete, updateUser, getUserBySearch } = require('../services/users.service');
 
 
 router.post('/', async (req, res) => {
@@ -31,35 +31,35 @@ router.post('/', async (req, res) => {
 
 
 // GET /users/:id
-router.get('/:id', async (req, res, next) => {
-    const id = req.params.id;
-    let user;
-    try {
-        user = await getUserById(id);
-        if (user === undefined)
-            res.send('not found user with id ' + id);
-    }
-    catch (error) {
-        next(error);
-    }
-    res.send(user);
-});
+// router.get('/:id', async (req, res, next) => {
+//     const id = req.params.id;
+//     let user;
+//     try {
+//         user = await getUserById(id);
+//         if (user === undefined)
+//             res.send('not found user with id ' + id);
+//     }
+//     catch (error) {
+//         next(error);
+//     }
+//     res.send(user);
+// });
 
 
 //by filter
 //????
 router.get('/:search', async (req, res, next) => {
-    const search = req.params.id;
-    let user;
+    const { search } = req.params;
+    let usersfilter;
     try {
-        user = await getUserById(id);
-        if (user === undefined)
-            res.send('not found user with id ' + id);
+        usersfilter = await getUserBySearch(search);
+        if (usersfilter === undefined)
+            res.send('not found user with search: ' + search);
     }
     catch (error) {
         next(error);
     }
-    res.send(user);
+    res.send(usersfilter);
 });
 
 // router.get('/:id', async (req, res) => {
