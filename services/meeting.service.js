@@ -87,7 +87,7 @@ const updateUser = async (id, user) => {
 }
 
 module.exports = {
-    getUsers,
+    getMeetings,
     getUserById,
     addUser,
     findByIdAndDelete, 

@@ -1,7 +1,7 @@
 {
-  "name": "node.js",
+  "name": "node",
   "version": "1.0.0",
-  "description": "",
+  "description": "1. Install **Node.js** https://nodejs.org/en/download/\r 2. Install **VS code** https://code.visualstudio.com/download\r 3. Download **bootcamp-template** project.\r 4. Open the project folder in **VS code** \r 5. Open terminal (shortcut: **ctrl+`**)\r 6. Run the following command: `> npm install`\\\r The project packages are now installed in the **node_modules** folder. \r 7. Run the following command: `> npm start`\\\r Now your project is running at http://localhost:8080/. \\\r Use this command to run the project next time.\r 8. create your own repository for this project, ans set up the origin on your project.\r 9. add me as a contributor in your github repo. ***chanakamin***",
   "main": "index.js",
   "scripts": {
     "strat": "node index",
@@ -14,5 +14,14 @@
     "cors": "^2.8.5",
     "express": "^4.18.1",
     "uuid": "^8.3.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EsterLev/server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/EsterLev/server/issues"
+  },
+  "homepage": "https://github.com/EsterLev/server#readme"
 }
