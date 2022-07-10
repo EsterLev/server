@@ -30,25 +30,6 @@ async function getUserById(id) {
 }
 
 
-// async function addUser(firstName, lastName, city, street, number, phone, email, height, weight) {
-//     const Id = uuidv4();
-//     let obj = {
-//         firstName: firstName, lastName: lastName, address: {
-//             city: city, street: street,
-//             number: number
-//         }, phone: phone, email: email, height: height,
-//         weight: { start: weight, meetings: [] }, diary: [], 
-//         id : Id
-//     };
-//     let user = JSON.stringify(obj, null, 2);
-//     console.log(user);
-//     const data = await getAllJson();
-//     data.users.push(user);
-//     console.log(data);
-//     updateJson(data);
-//     message: { user }
-// }
-
 async function addMeeting(user) {
         if (!user.meeting.date || !user.meeting.weight ) {
             throw new Error('meeting must include date and weight');
