@@ -1,60 +1,74 @@
-const { Router } = require('express');
-const meetingService = require('../services/meeting.service');
-const router = Router();
-router.get('/:id', async (req, res) => {
-    // TODO: return business details.
-    res.send('business');
-});
+const express = require('express');
+const router = express.Router();
+const { addUserMeeting, getMeetings, getMeetingsByUserId
+    , updateMeeting, deleteMeeting } = require('../services/meeting.service');
 
-module.exports = router; 
-module.exports = router;
-
-// GET /meeting
-router.get('/', async (req, res, next) => {
-    let meetings
-    try {
-        meetings = await getMeetings();
-    }
-    catch (error) {
-        next(error);
-    }
-    res.send(meetings);
-});
-// GET /meeting/:id
-router.get('/:id', async (req, res, next) => {
-    const id = req.params.id;
-    let meeting;
-    try {
-        meeting = await getMeatingById(id);
-        console.log("user " + meeting);
-    }
-    catch (error) {
-        next(error);
-    }
-    res.send(meeting);
-});
-// POST /meeting
-router.post('/', async (req, res) => {
+router.post('/:id', async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
     const newMeeting = req.body;
+    console.log(newMeeting);
     try {
-        await addUserMeeting(newMeeting.date,newMeeting.wheight);
-        message: { 'success create new meeting' }
+        await addUserMeeting(id, newMeeting);
+        res.send();
     }
-    catch (err) {
-        console.error(err);
+    catch (error) {
+        res.status(400).json({ message: error.message });
     }
-    res.send();
 });
-// PUT /meeting/:id
 
-// DELETE /meeting/:id
-router.delete('/:id', async (req, res) => {
-    const id = req.params.id;
+//GET /meeting
+router.get('/', async (req, res) => {
     try {
-        user.meetings.findByIdAndDelete(id);
-        console.log('success!')
-    } catch (err) {
-        console.error(err)
+        const meetings = await getMeetings();
+        console.log(meetings);
+        res.send(meetings);
     }
-    res.send();
+    catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+//GET /meeting/:id
+router.get('/:id', async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    try {
+        const meetings = await getMeetingsByUserId(id);
+        console.log(meetings);
+        res.send(meetings);
+    }
+    catch (error) {
+        res.status(404).json({ message: 'idMeeting not found' })
+    }
+});
+
+//DELETE /meeting/:id
+router.delete('/:idUser/:id', async (req, res) => {
+    const { id } = req.params;
+    const { idUser } = req.params;
+    try {
+        await deleteMeeting(idUser, id);
+        res.send();
+    } catch (error) {
+        res.status(400).json({ message: 'idMeeting not found' });
+    }
 })
+
+//PUT /meeting/:id
+router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    console.log(id);
+    const updates = req.body;
+    console.log(updates);
+    try {
+        await updateMeeting(updates, id);
+        res.send();
+    }
+    catch (error) {
+        res.status(400).json({ message: 'idMeeting not found' });
+    }
+});
+
+
+module.exports = router;
