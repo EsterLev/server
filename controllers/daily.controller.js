@@ -1,10 +1,12 @@
-const express = require('express');
-const fs = require('fs/promises');
+// const express = require('express');
+// const fs = require('fs/promises');
 // const fsPromises = require('fs').promises;
-const router = express.Router();
+// const router = express.Router();
 //fsPromises.readFile('../users.json', 'utf8');
-const { getDaily, addDaily, findByIdAndDelete, updateDaily} = require('../services/daily.service');
-
+// const { getDaily, addDaily, findByIdAndDelete, updateDaily} = require('../services/daily.service');
+const express = require('express');
+const Service = require('../models/service');
+const router = express.Router();
 
 router.post('/:id', async (req, res) => {
     // const { managerDaily } = req.body;
@@ -19,13 +21,6 @@ router.post('/:id', async (req, res) => {
         console.error(err)
     }
     res.send(Daily);
-    // try {
-    //     const user = req.body.user;
-    //     const newUser = await addUser(user);
-    //     res.send(newUser);
-    // } catch (error) {
-    //     res.status(500).send(error.message);
-    // }
 });
 
 

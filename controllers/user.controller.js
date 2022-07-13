@@ -1,15 +1,14 @@
 const express = require('express');
-const fs = require('fs/promises');
+// const fs = require('fs/promises');
 // const fsPromises = require('fs').promises;
 const router = express.Router();
 //fsPromises.readFile('../users.json', 'utf8');
 const { getUserById, getUsers, addUser, findByIdAndDelete, updateUser, getUserBySearch } = require('../services/users.service');
 
-
 router.post('/', async (req, res) => {
+    const { firstName, lastName, address, phone, email, height, weight, managerDaily } = req.body;
     try {
         if (req.body) {
-            const { firstName, lastName, address, phone, email, height, weight, managerDaily } = req.body;
             const data = {
                 firstName,
                 lastName,
@@ -62,11 +61,11 @@ router.get('/:search', async (req, res, next) => {
     res.send(usersfilter);
 });
 
-// router.get('/:id', async (req, res) => {
-//     const id = req.params.id;
-//     const user = await UserService.getUser(id);
-//     res.send(user);
-// })
+router.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    const user = await UserService.getUser(id);
+    res.send(user);
+})
 
 router.get('/', async (req, res, next) => {
     let users;
@@ -92,7 +91,7 @@ router.delete('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     if (req.body) {
-        const { id } = req.params;
+        const { id } = parseInt(req.params);
         const { firstName, lastName, address, phone, email, height, weight, managerDaily } = req.body;
         const data = {
             firstName,
@@ -108,5 +107,6 @@ router.put('/:id', async (req, res) => {
         res.send(created);
     }
 })
+
 module.exports = router;
 
