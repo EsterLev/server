@@ -9,3 +9,5 @@
 //         console.log(`error to connect to db ${error.message}`);
 //     }
 // }
+
+//it isn't pretty to put extra code please remove it! :shoshi zada

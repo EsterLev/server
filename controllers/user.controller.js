@@ -60,7 +60,7 @@ const { getUserById, getUsers, addUser } = require('../services/user.service');
 
 router.post('/', async (req, res) => {
     const newUser = req.body;
-    try {
+    try {                          //please enter line that the code will be taidy:shoshi zada
         await addUser(newUser.firstName, newUser.lastName, newUser.city, newUser.street, newUser.number, newUser.phone, newUser.email, newUser.height, newUser.weight);
         message: { 'success create newUser' }
     }
@@ -117,8 +117,8 @@ router.get('/', async (req, res, next) => {
 router.delete('/:id', async (req, res) => {
     const id = req.params.id;
     try {
-        Users.findByIdAndDelete(id);
-        console.log('success!')
+      Users.findByIdAndDelete(id); //who is it  Users? it not good and clear! :shoshi zada
+      console.log("success!");
     } catch (err) {
         console.error(err)
     }
@@ -126,5 +126,9 @@ router.delete('/:id', async (req, res) => {
 })
 
 module.exports = router;
+
+//please remove all the extra code! :shoshi zada
+//please divide the function to roter and controller :shoshi zada
+
 
 

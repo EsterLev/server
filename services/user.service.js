@@ -61,13 +61,13 @@ async function getUsers() {
 }
 
 async function getUserById(id) {
-    const data = await fs.readFile('../users.json');
-    console.log(data);
-    // const users = JSON.parse(data).users;
-    // console.log(users);
-    const user = data.find(user => user.id === id);
-    console.log(user);
-    return user;
+  const data = await fs.readFile("../users.json");
+  console.log(data);
+  // const users = JSON.parse(data).users;  //it isn't pretty to put extra code here please remove it! :shoshi zada
+  // console.log(users);
+  const user = data.find((user) => user.id === id);
+  console.log(user);
+  return user;
 }
 let baseId =[...getTasks()].pop()?.id || 1;
 const getId = () => ++baseId;
@@ -82,21 +82,20 @@ async function addUser(firstName, lastName, city, street, number, phone, email, 
     };
     let user = JSON.stringify(obj, null, 2);
     await fs.writeFile('../users.json', user, err => { console.log(err) });
-    message: { user }
+    message: { user } //what is it messege why it gray?  :shoshi zada
 }
 
 async function findByIdAndDelete(id){
-    const users = getUsers();
-    const index = users.findIndex(t => t.id === id);
-    tasks.splice(index, 1);
-    try {
-        await fs.writeJson(__dirname + '/users.json', users);
-        console.log('success!')
-    } catch (err) {
-        console.error(err)
-    }
-    res.send('success');
-    
+  const users = getUsers();
+  const index = users.findIndex((t) => t.id === id); //please put a name Significant name insted of t like user :shoshi zada
+  tasks.splice(index, 1);
+  try {
+    await fs.writeJson(__dirname + "/users.json", users);
+    console.log("success!");
+  } catch (err) {
+    console.error(err);
+  }
+  res.send("success");
 }
 
 module.exports = {
