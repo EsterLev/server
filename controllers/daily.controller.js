@@ -1,12 +1,9 @@
-// const express = require('express');
+const express = require('express');
 // const fs = require('fs/promises');
 // const fsPromises = require('fs').promises;
-// const router = express.Router();
-//fsPromises.readFile('../users.json', 'utf8');
-// const { getDaily, addDaily, findByIdAndDelete, updateDaily} = require('../services/daily.service');
-const express = require('express');
-const Service = require('../models/service');
 const router = express.Router();
+//fsPromises.readFile('../users.json', 'utf8');
+const { getDaily, addDaily, findByIdAndDelete, updateDaily} = require('../services/daily.service');
 
 router.post('/:id', async (req, res) => {
     // const { managerDaily } = req.body;
