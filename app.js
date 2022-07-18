@@ -10,7 +10,7 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
 const db = require('./models/db');
 // const customCss = fs.readFileSync((process.cwd()+"/swagger.css"), 'utf8');
-const port = 3000;
+const port = process.env.PORT || 3000;
 db.connect();
 // , {customCss}
 app.use(cors());
@@ -26,6 +26,4 @@ app.use('/meeting', meetingController);
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
-
-
 
