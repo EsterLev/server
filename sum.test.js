@@ -1,4 +1,7 @@
 const fizz_buzz = require('./sum');
+const users = require('./services/users.service');
+const daily = require('./services/daily.service');
+const login = require('./services/login.service');
 
 describe("FizzBuzz", () => {
   test('[3] should result in "fizz"', () => {
@@ -19,13 +22,9 @@ describe("FizzBuzz", () => {
 
 });
 
-const { getUserById, getUsers } = require('../services/users.service');
-const { getDaily} = require('../services/daily.service');
-const { login } = require('../services/login.service');
-
 describe("getUsers", () => {
   test('get users', () => {
-    expect(getUsers()).toBe([
+    expect(users.getUsers()).toBe([
       {
         "id": 1,
         "firstName": "Shira",
@@ -234,7 +233,7 @@ describe("getUsers", () => {
   });
 
   test('getUserById[6]', () => {
-    expect(getUserById(6)).toBe(  {
+    expect(users.getUserById(6)).toBe(  {
       "firstName": "Chana",
       "lastName": "Levi",
       "address": {
@@ -271,7 +270,7 @@ describe("getUsers", () => {
   });
 
   test('getDaily[1]', () => {
-    expect(getDaily(1)).toBe([
+    expect(daily.getDaily(1)).toBe([
       {
         "meals": [
           "בננה"
@@ -312,7 +311,7 @@ describe("getUsers", () => {
   });
 
   test('login("st3281357@gmail.com","0583281357")', () => {
-    expect(login("st3281357@gmail.com","0583281357")).toBe({
+    expect(login.login("st3281357@gmail.com","0583281357")).toBe({
       "id": 2,
       "firstName": "Esti",
       "lastName": "Lev",
