@@ -11,6 +11,7 @@ async function getUsers() {
     // return data.users;
     const users = await User.find();
     return users;
+    console.log('getting all users')
 }
 
 //get all the json

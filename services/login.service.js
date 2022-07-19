@@ -20,13 +20,17 @@ async function login(email, phone) {
     //     if (data.manager.email === email && data.manager.phone === phone)
     //         return data.manager;
     // }
-
-    const user = await User.findOne(u => u.email === email && u.phone === phone);
+    console.log('in login process')
+    // const user = await User.findOne({u => u.email === email && u.phone === phone});
+    const user = await User.findOne({ email: email, phone: phone });
     if(user!==undefined)
     return user;
-    const manager = await Manager.findOne(u => u.email === email && u.phone === phone);
+    console.log('return user')
+    // const manager = await Manager.findOne({u => u.email === email && u.phone === phone});
+    const manager = await Manager.findOne({ email: email, phone: phone });
     if(manager!==undefined)
     return manager;
+    console.log('return manager')
 }
 
 module.exports = {
