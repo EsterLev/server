@@ -25,10 +25,15 @@ async function getUsers() {
 // const updateJson = async (user) => fs.writeFile('./users.json', JSON.stringify(user));
 
 
-async function getUserById(id) {
-    // const users = await getUsers();
-    // const user = await users.find(u => u.id === parseInt(id));
-    // return user;
+// async function getUserById(id) {
+//     // const users = await getUsers();
+//     // const user = await users.find(u => u.id === parseInt(id));
+//     // return user;
+//     const user = await User.findOne({ _id: ObjectId(id) });
+//     return user;
+// }
+
+const getUserById = async (id) => {
     const user = await User.findOne({ _id: ObjectId(id) });
     return user;
 }

@@ -23,14 +23,22 @@ async function login(email, phone) {
     console.log('in login process')
     // const user = await User.findOne({u => u.email === email && u.phone === phone});
     const user = await User.findOne({ email: email, phone: phone });
-    if(user!==undefined)
-    return user;
-    console.log('return user')
+    if(user!==null){
+       console.log('return user')
+      console.log(user)
+      return user;  
+    }
+     
+    
     // const manager = await Manager.findOne({u => u.email === email && u.phone === phone});
     const manager = await Manager.findOne({ email: email, phone: phone });
     if(manager!==undefined)
-    return manager;
-    console.log('return manager')
+    {
+        console.log('return manager')
+        console.log(manager)
+        return manager;
+    }
+ 
 }
 
 module.exports = {
