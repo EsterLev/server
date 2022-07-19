@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 async function connect() {
-    await mongoose.connect('mongodb://localhost:27017/weightWatchers');
+    await mongoose.connect('mongodb://localhost:${process.env.HOST  || 27017}/${process.env.DB || weightWatchers}');
 }
 
 module.exports = {

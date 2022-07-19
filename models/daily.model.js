@@ -1,13 +1,11 @@
 const { Schema, model } = require('mongoose');
 
-const userSchema = new Schema({
+const dailySchema = new Schema({
   meals: { type: Array() },
   date: { type: Date },
   id: { type: Number }
 });
 
-const Meet = model('Meet', userSchema);
+const Daily = model('Daily', dailySchema);
 
-module.exports = Meet;
-
-////שגדשש
+module.exports = Daily;

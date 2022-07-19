@@ -3,7 +3,7 @@ const express = require('express');
 // const fsPromises = require('fs').promises;
 const router = express.Router();
 //fsPromises.readFile('../users.json', 'utf8');
-const { getUserById, getUsers, addUser, findByIdAndDelete, updateUser, getUserBySearch } = require('../services/users.service');
+const { getUsers,getUserById,addUser,findByIdAndDelete,updateUser,getBySearch } = require('../services/users.service');
 
 router.post('/', async (req, res) => {
     const { firstName, lastName, address, phone, email, height, weight, managerDaily } = req.body;
@@ -46,12 +46,12 @@ router.post('/', async (req, res) => {
 
 
 //by filter
-//????
 router.get('/:search', async (req, res, next) => {
     const { search } = req.params;
+    let searches = [false, false, false, false];
     let usersfilter;
     try {
-        usersfilter = await getUserBySearch(search);
+        usersfilter = await getBySearch(searches);
         if (usersfilter === undefined)
             res.send('not found user with search: ' + search);
     }
@@ -63,7 +63,7 @@ router.get('/:search', async (req, res, next) => {
 
 router.get('/:id', async (req, res) => {
     const id = req.params.id;
-    const user = await UserService.getUser(id);
+    const user = await getUserById(id);
     res.send(user);
 })
 
