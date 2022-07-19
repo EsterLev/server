@@ -1,15 +1,14 @@
 const express = require('express');
-const fs = require('fs/promises');
+// const fs = require('fs/promises');
 // const fsPromises = require('fs').promises;
 const router = express.Router();
 //fsPromises.readFile('../users.json', 'utf8');
-const { getUserById, getUsers, addUser, findByIdAndDelete, updateUser } = require('../services/users.service');
-
+const { getUsers,getUserById,addUser,findByIdAndDelete,updateUser,getBySearch } = require('../services/users.service');
 
 router.post('/', async (req, res) => {
+    const { firstName, lastName, address, phone, email, height, weight, managerDaily } = req.body;
     try {
         if (req.body) {
-            const { firstName, lastName, address, phone, email, height, weight, managerDaily } = req.body;
             const data = {
                 firstName,
                 lastName,
@@ -31,42 +30,42 @@ router.post('/', async (req, res) => {
 
 
 // GET /users/:id
-router.get('/:id', async (req, res, next) => {
-    const id = req.params.id;
-    let user;
-    try {
-        user = await getUserById(id);
-        if (user === undefined)
-            res.send('not found user with id ' + id);
-    }
-    catch (error) {
-        next(error);
-    }
-    res.send(user);
-});
+// router.get('/:id', async (req, res, next) => {
+//     const id = req.params.id;
+//     let user;
+//     try {
+//         user = await getUserById(id);
+//         if (user === undefined)
+//             res.send('not found user with id ' + id);
+//     }
+//     catch (error) {
+//         next(error);
+//     }
+//     res.send(user);
+// });
 
 
 //by filter
-//????
 router.get('/:search', async (req, res, next) => {
-    const search = req.params.id;
-    let user;
+    const { search } = req.params;
+    let searches = [false, false, false, false];
+    let usersfilter;
     try {
-        user = await getUserById(id);
-        if (user === undefined)
-            res.send('not found user with id ' + id);
+        usersfilter = await getBySearch(searches);
+        if (usersfilter === undefined)
+            res.send('not found user with search: ' + search);
     }
     catch (error) {
         next(error);
     }
-    res.send(user);
+    res.send(usersfilter);
 });
 
-// router.get('/:id', async (req, res) => {
-//     const id = req.params.id;
-//     const user = await UserService.getUser(id);
-//     res.send(user);
-// })
+router.get('/:id', async (req, res) => {
+    const id = req.params.id;
+    const user = await getUserById(id);
+    res.send(user);
+})
 
 router.get('/', async (req, res, next) => {
     let users;
@@ -92,7 +91,7 @@ router.delete('/:id', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     if (req.body) {
-        const { id } = req.params;
+        const { id } = parseInt(req.params);
         const { firstName, lastName, address, phone, email, height, weight, managerDaily } = req.body;
         const data = {
             firstName,
@@ -108,5 +107,6 @@ router.put('/:id', async (req, res) => {
         res.send(created);
     }
 })
+
 module.exports = router;
 

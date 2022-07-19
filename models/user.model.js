@@ -1,16 +1,18 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model, default: mongoose } = require('mongoose');
+// import { meetings } from './meetings.model';
+// import { daily  } from './daily.model';
 
-const meetSchema = new Schema({
-    firstName : { type: String },
-    lastName : { type: String },
-    address : { type: String },
-    phone : { type: String },
-    email  : { type: String },
-    height : { type: Number },
-    weight : { type: String },
-    managerDaily : { type: Array() }
-  });
+const userSchema = new Schema({
+  firstName: { type: String },
+  lastName: { type: String },
+  address: { type: Object() },
+  phone: { type: String },
+  email: { type: String },
+  height: { type: Number },
+  meetings: { type: mongoose.Types.ObjectId, ref:'Meetings' },
+  managerDaily: { type: mongoose.Types.ObjectId, ref:'Daily' }
+});
 
-const Meet = model('Meet', meetSchema);
+const User = model('User', userSchema);
 
-module.exports = Meet;
+module.exports = User;
