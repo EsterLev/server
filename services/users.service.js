@@ -23,7 +23,6 @@ async function getUsers() {
 //update json
 // const updateJson = async (user) => fs.writeFile('./users.json', JSON.stringify(user));
 
-
 async function getUserById(id) {
     // const users = await getUsers();
     // const user = await users.find(u => u.id === parseInt(id));
@@ -31,7 +30,6 @@ async function getUserById(id) {
     const user = await User.findOne({ _id: ObjectId(id) });
     return user;
 }
-
 
 // async function addUser(firstName, lastName, city, street, number, phone, email, height, weight) {
 //     const Id = uuidv4();
@@ -98,21 +96,25 @@ const byWeightFunc = (arr, min, max) => {
     console.log(ans);
     return ans;
 }
+
 const byProcessFunc = (arr) => {
     console.log('byProcessFunc');
     const ans = arr.filter(f => f.weight.start > (f.weight.meetings[f.weight.meetings.length - 1].weight));
     console.log(ans);
     return ans;
 }
+
 const byBMIFunc = (arr, bmiMin, bmiMax) => {
     const ans = arr.filter(f => (f.weight.start / (f.height * f.height) > bmiMin) &&
         (f.weight.start / (f.height * f.height) < bmiMax));
     return ans;
 }
+
 const byCityFunc = (arr, city) => {
     const ans = arr.filter(f => f.address.city === city);
     return ans;
 }
+
 const searchFunc = (arr, inputToSearch) => {
     console.log(inputToSearch);
     const ans = arr.filter(user => user.id === inputToSearch ||

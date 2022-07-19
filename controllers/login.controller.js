@@ -11,6 +11,7 @@ router.post('/', async (req, res) => {
         if (req.body) {
             const { email, phone } = req.body;
             const succsess = await login(email, phone);
+            console.log(succsess);
             res.send(succsess);
         }
     } catch (err) {

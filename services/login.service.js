@@ -12,7 +12,7 @@ const { ObjectId } = require('mongodb');
 // }
 
 async function login(email, phone) {
-   // const data = await getAllJson();
+    // const data = await getAllJson();
     // const user = await data.users.find(u => u.email === email && u.phone === phone);
     // if (user)
     //     return user;
@@ -21,12 +21,12 @@ async function login(email, phone) {
     //         return data.manager;
     // }
 
-    const user = await User.findOne(u => u.email === email && u.phone === phone);
-    if(user!==undefined)
-    return user;
-    const manager = await Manager.findOne(u => u.email === email && u.phone === phone);
-    if(manager!==undefined)
-    return manager;
+    const user = await User.findOne({ email: email, phone: phone });
+    if (user !== undefined)
+        return user;
+    const manager = await Manager.findOne({ email: email, phone: phone });
+    if (manager !== undefined)
+        return manager;
 }
 
 module.exports = {

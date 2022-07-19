@@ -54,7 +54,7 @@ const getMeetingsByUserId = async (id) => {
 const getMeetingsById = async (id, allMeetings) => {
     console.log(id);
     const allMeeting = allMeetings;
-    const meeting = allMeeting.find(m => m.idmeeting === id)
+    const meeting = allMeeting.find({id : id})
     console.log(meeting);
     return meeting;
 }
