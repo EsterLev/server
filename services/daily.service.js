@@ -1,5 +1,6 @@
 const fs = require('fs/promises');
 const Daily = require('../models/daily.model');
+const User = require('../models/user.model');
 const { ObjectId } = require('mongodb');
 
 //get daily by user
@@ -77,8 +78,13 @@ const updateDaily = async (idu, idd, daily) => {
     // await updateJson(data);
     // return theDairy;
     await Daily.findByIdAndUpdate(idu, idd, updates);
-
 }
+
+// async function updeteDairiesById(id, dairy) {
+//     console.log(dairy);
+//      const updateUser = await userModel.updateOne({ _id: ObjectId(id) }, dairy);
+//     return dairy;
+//   }
 
 module.exports = {
     getDaily,

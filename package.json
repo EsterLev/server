@@ -4,7 +4,7 @@
   "description": "1. Install **Node.js** https://nodejs.org/en/download/\r 2. Install **VS code** https://code.visualstudio.com/download\r 3. Download **bootcamp-template** project.\r 4. Open the project folder in **VS code** \r 5. Open terminal (shortcut: **ctrl+`**)\r 6. Run the following command: `> npm install`\\\r The project packages are now installed in the **node_modules** folder. \r 7. Run the following command: `> npm start`\\\r Now your project is running at http://localhost:8080/. \\\r Use this command to run the project next time.\r 8. create your own repository for this project, ans set up the origin on your project.\r 9. add me as a contributor in your github repo. ***chanakamin***",
   "main": "index.js",
   "scripts": {
-    "strat": "node app.js",
+    "start": "node app.js",
     "test": "jest",
     "dev": "nodemon app.js"
   },
@@ -13,7 +13,12 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "express-generator": "^4.16.0",
+    "express-oauth2-jwt-bearer": "^1.1.0",
+    "express-openid-connect": "^2.8.0",
+    "jest": "^28.1.3",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.4",
     "swagger-jsdoc": "^6.2.1",
