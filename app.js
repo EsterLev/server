@@ -11,7 +11,7 @@ const swaggerDocument = require('./swagger.json');
 const db = require('./models/db');
 // const customCss = fs.readFileSync((process.cwd()+"/swagger.css"), 'utf8');
 // const port = process.env.PORT || 3030;
-const port =3030
+const port =3000
 db.connect();
 // , {customCss}
 app.use(cors());

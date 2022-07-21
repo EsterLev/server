@@ -54,6 +54,7 @@ const addUserMeeting = async (id, updates) => {
 
 const getMeetings = async () => {
     const data = await getData();
+    console.log(data)
     const allMeetings = [];
     data.users.forEach(element => {
         element.meeting.forEach(m => {

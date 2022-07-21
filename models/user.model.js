@@ -9,8 +9,8 @@ const userSchema = new Schema({
   phone: { type: String },
   email: { type: String },
   height: { type: Number },
-  meetings: { type: mongoose.Types.ObjectId, ref:'Meetings' },
-  managerDaily: { type: mongoose.Types.ObjectId, ref:'Daily' }
+  meetings: { type: Array},
+  managerDaily: { type: Array }
 });
 
 const User = model('User', userSchema);

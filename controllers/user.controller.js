@@ -46,20 +46,20 @@ router.post('/', async (req, res) => {
 
 
 //by filter
-router.get('/:search', async (req, res, next) => {
-    const { search } = req.params;
-    let searches = [false, false, false, false];
-    let usersfilter;
-    try {
-        usersfilter = await getBySearch(searches);
-        if (usersfilter === undefined)
-            res.send('not found user with search: ' + search);
-    }
-    catch (error) {
-        next(error);
-    }
-    res.send(usersfilter);
-});
+// router.get('/:search', async (req, res, next) => {
+//     const { search } = req.params;
+//     let searches = [false, false, false, false];
+//     let usersfilter;
+//     try {
+//         usersfilter = await getBySearch(searches);
+//         if (usersfilter === undefined)
+//             res.send('not found user with search: ' + search);
+//     }
+//     catch (error) {
+//         next(error);
+//     }
+//     res.send(usersfilter);
+// });
 
 router.get('/:id', async (req, res) => {
     const id = req.params.id;

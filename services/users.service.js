@@ -35,6 +35,8 @@ async function getUsers() {
 
 const getUserById = async (id) => {
     const user = await User.findOne({ _id: ObjectId(id) });
+    console.log('get user by id is works!')
+    // console.log(user);
     return user;
 }
 
@@ -91,6 +93,7 @@ async function findByIdAndDelete(id) {
 
 const updateUser = async (id, user) => {
     await User.findByIdAndUpdate(id, user);
+    console.log('update user is works')
     // const data = await getAllJson();
     // const _user = await data.users.find(u => u.id === parseInt(id));
     // Object.assign(_user, user);

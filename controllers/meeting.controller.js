@@ -20,6 +20,7 @@ router.post('/:id', async (req, res) => {
 //GET /meeting
 router.get('/', async (req, res) => {
     try {
+        console.log('entered to try of get meetings')
         const meetings = await getMeetings();
         console.log(meetings);
         res.send(meetings);
