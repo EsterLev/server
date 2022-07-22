@@ -19,7 +19,6 @@ db.connect();
 app.use(cors());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(express.json());
-
 app.use(auth(authMiddleware));
 
 // req.isAuthenticated is provided from the auth router
@@ -33,7 +32,7 @@ app.get('/profile', requiresAuth(), (req, res) => {
 
 app.use('/users', userController);
 app.use('/daily', dailyController);
-app.use('/login', loginController);
+// app.use('/login', loginController);
 app.use('/meeting', meetingController);
 
 app.listen(port, () => {
