@@ -30,10 +30,10 @@ app.get('/profile', requiresAuth(), (req, res) => {
   res.send(JSON.stringify(req.oidc.user));
 });
 
-app.use('/users', userController);
-app.use('/daily', dailyController);
+app.use('/users', requiresAuth(), userController);
+app.use('/daily', requiresAuth(), dailyController);
 // app.use('/login', loginController);
-app.use('/meeting', meetingController);
+app.use('/meeting', requiresAuth(), meetingController);
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
