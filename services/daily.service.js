@@ -78,8 +78,13 @@ const updateDaily = async (idu, idd, daily) => {
     // await updateJson(data);
     // return theDairy;
     await Daily.findByIdAndUpdate(idu, idd, updates);
-
 }
+// async function updeteDairiesById(id, dairy) {
+//     console.log(dairy);
+//      const updateUser = await userModel.updateOne({ _id: ObjectId(id) }, dairy);
+//     return dairy;
+//   }
+
 // async function updeteDairiesById(id, dairy) {
 //     console.log(dairy);
 //      const updateUser = await userModel.updateOne({ _id: ObjectId(id) }, dairy);

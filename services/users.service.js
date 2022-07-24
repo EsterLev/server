@@ -40,7 +40,6 @@ const getUserById = async (id) => {
     return user;
 }
 
-
 // async function addUser(firstName, lastName, city, street, number, phone, email, height, weight) {
 //     const Id = uuidv4();
 //     let obj = {
